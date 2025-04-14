@@ -1,0 +1,18 @@
+Strategy Object for the AI Coach
+type QueryType = 'program_match' | 'single_parent_support' | 'compare_schools';
+
+const aiStrategies: Record<QueryType, (input: any) => Promise<string>> = {
+  program_match: async (input) => {
+    // Call College Scorecard or Coursera APIs
+    // Construct LLM prompt
+    return await callLLM(`Find a program that fits this schedule: ${input.schedule}`);
+  },
+  single_parent_support: async (input) => {
+    return await callLLM(`Can a single parent with 2 jobs attend school? Consider this: ${JSON.stringify(input)}`);
+  },
+  compare_schools: async (input) => {
+    const { schools } = input;
+    const schoolData = await fetchSchoolComparisonData(schools); // calls APIs
+    return await callLLM(`Compare these schools for cost and flexibility: ${JSON.stringify(schoolData)}`);
+  },
+};

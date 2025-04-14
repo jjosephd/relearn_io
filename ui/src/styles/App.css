@@ -1,0 +1,52 @@
+@import 'tailwindcss';
+@plugin "daisyui";
+:root {
+  color: white;
+}
+
+.text-shadow {
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.763),
+    0 0 10px rgba(255, 255, 255, 0.75);
+}
+.text-effect {
+  @apply bg-gradient-to-br from-white to-slate-400 text-transparent bg-clip-text;
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #333333 100%);
+}
+
+.hover-effect {
+  @apply hover:text-emerald-300 ease-in duration-200;
+}
+
+.nav-link {
+  @apply text-slate-400;
+}
+
+.hero-layout {
+  animation: grow 0.7s ease-in;
+  transition: smooth;
+}
+.main-layout {
+  animation: fade-in 0.7s ease-in;
+  transition: smooth;
+}
+
+@keyframes grow {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
