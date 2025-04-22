@@ -1,4 +1,3 @@
-import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import Hero from './Hero';
 import generatedLearn from '../../assets/generated-learn.png';

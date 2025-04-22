@@ -18,3 +18,13 @@ export interface CollegeData {
   out_of_state_tuition: number | string;
   admission_rate: number | string;
 }
+
+export type FormDataType = {
+  schoolName: string;
+  major: string;
+  educationGoal: string;
+  locationType: string;
+  tuitionBudget: string;
+  schoolType: string;
+  admissionDifficulty: string;
+};

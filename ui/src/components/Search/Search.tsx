@@ -59,21 +59,30 @@ const Search = () => {
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    setSearchTerm(event.target.value);
+    setSearchTerm(event.currentTarget.value);
   };
 
   return (
     <div>
       <h2 className="text-2xl font-bold ">Explore</h2>
       <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchTerm}
-          className="search-bar h-10 input bg-slate-400/10 focus-within:bg-slate-400/20 focus:outline-none focus:ring-0  w-full max-w-xs"
-          onChange={onChange}
-        />
-        <button className="btn btn-info submit">Search</button>
+        <div className="form-container grid grid-cols-1 gap-4 md:grid-cols-2">
+          <input
+            type="text"
+            placeholder="Search by name"
+            value={searchTerm}
+            className="search-bar h-10 input bg-slate-400/10 focus-within:bg-slate-400/20 focus:outline-none focus:ring-0  w-full max-w-xs"
+            onChange={onChange}
+          />
+          <input
+            type="text"
+            placeholder="Search by program"
+            value={searchTerm}
+            className="search-bar h-10 input bg-slate-400/10 focus-within:bg-slate-400/20 focus:outline-none focus:ring-0  w-full max-w-xs"
+            onChange={onChange}
+          />
+          <button className="btn btn-info submit">Search</button>
+        </div>
       </form>
       {loading && <Spinner />}
       {results && (

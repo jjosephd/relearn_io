@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import menuIcon from '../assets/icons/menuIcon.svg';
 import capIcon from '../assets/icons/capIcon.svg';
 import { Link } from 'react-router-dom';

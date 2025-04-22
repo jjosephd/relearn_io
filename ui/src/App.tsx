@@ -1,7 +1,6 @@
 import { Outlet, Route, Routes } from 'react-router';
 import './styles/App.css';
 import NavBar from './components/NavBar';
-import Hero from './components/Home/Hero';
 import About from './components/About';
 import Home from './components/Home/Home';
 import Search from './components/Search/Search';

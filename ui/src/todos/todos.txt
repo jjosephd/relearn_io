@@ -16,3 +16,28 @@ const aiStrategies: Record<QueryType, (input: any) => Promise<string>> = {
     return await callLLM(`Compare these schools for cost and flexibility: ${JSON.stringify(schoolData)}`);
   },
 };
+
+
+TODO List:
+#UI
+-Fix form state
+-Clean up returned search results formatting (spacing, layout, font sizing).
+-Add loading spinner or shimmer effect while fetching school data. [completed]
+-Highlight top matching school(s) visually (e.g. badge, color box).
+-Add a message or fallback if no schools match criteria.
+-Implement responsive layout for results (especially on mobile).
+
+
+#service
+#Service (Short-Term: Set up for OpenAI)
+-Draft a "school summary" formatter (prepares result data for OpenAI prompts).
+-Create mock prompts for OpenAI: "Explain why this school is a good match for a parent looking for X."
+-Build a getNaturalLanguageSummary() function using hardcoded text before hooking up OpenAI.
+-Add POST /generate-summary API endpoint (Flask) for chatbot to call later.
+
+#AI Integration (Future / Vision)
+-Integrate OpenAI to summarize matched schools into user-friendly recommendations.
+-Train prompt to consider user goals + constraints (budget, childcare, flexibility).
+-Build a study plan suggestion feature using OpenAI ("How can I balance school with a 4-year-old?")
+-Add a chatbot or guided Q&A UI that pulls in API results and OpenAI responses.
+-Allow users to save and revisit personalized suggestions (simple local storage or backend persistence).

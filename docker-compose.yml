@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: ./service
+    ports:
+      - '5001:5000'
+    volumes:
+      - ./service:/app
+    environment:
+      - FLASK_ENV=development
+
+  frontend:
+    build:
+      context: ./ui
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./ui:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
