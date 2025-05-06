@@ -22,7 +22,7 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app, origins="http://localhost:5173", supports_credentials=True)
 
-app.register_blueprint(school_bp, url_prefix='/schools', methods=['GET'])
+app.register_blueprint(school_bp, url_prefix='/schools')
 
 if __name__ == '__main__':
     app.run(debug=True)
