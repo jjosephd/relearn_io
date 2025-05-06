@@ -1,30 +1,42 @@
 def filter_schools(schools, state=None, program=None, max_tuition=None):
-    """
-    Filters the list of schools based on optional state, program, and tuition cap.
-    """
     filtered = []
 
     for school in schools:
         try:
-            # State filter
-            if state and school.get("school.state") != state.upper():
+            name = school.get("school.name", "N/A")
+            school_state = school.get("school.state", "").upper()
+
+            print(f"\n📘 Checking: {name} ({school_state})")
+
+            # Filter by state
+            if state and school_state != state.upper():
+                print(" ❌ Skipped: State mismatch")
                 continue
 
-            # Tuition filter (in-state only for now)
+            # Filter by tuition
             tuition = school.get("latest.cost.tuition.in_state")
-            if max_tuition and (not isinstance(tuition, (int, float)) or tuition > max_tuition):
-                continue
-
-            # Program filter
-            if program:
-                programs = school.get("latest.programs.cip_4_digit", [])
-                if not any(p.get("title") == program for p in programs):
+            if max_tuition:
+                if tuition is None:
+                    print(" ❌ Skipped: Tuition missing")
+                    continue
+                if not isinstance(tuition, (int, float)) or tuition > max_tuition:
+                    print(f" ❌ Skipped: Tuition too high → ${tuition}")
                     continue
 
+            # Filter by program
+            if program:
+                programs = school.get("latest.programs.cip_4_digit", [])
+                match = any(p.get("title") == program for p in programs)
+                if not match:
+                    print(" ❌ Skipped: Program not offered")
+                    continue
+
+            print(" ✅ Included")
             filtered.append(school)
 
         except Exception as e:
-            print(f"Error filtering school {school.get('school.name')}: {e}")
+            print(f" ⚠️ Error on {name}: {e}")
             continue
 
+    print(f"\n🎯 Final filtered count: {len(filtered)}")
     return filtered

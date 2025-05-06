@@ -7,12 +7,9 @@ COLLEGE_API_KEY = os.getenv("COLLEGE_API_KEY")
 BASE_URL = "https://api.data.gov/ed/collegescorecard/v1/schools"
 
 def query_college_scorecard(per_page=100):
-    """
-    Fetches a broad list of schools with no filters applied.
-    Only fields needed for local filtering and display are included.
-    """
     params = {
         "api_key": COLLEGE_API_KEY,
+        "school.name": "tech",  # Required pseudo-filter to get general results
         "fields": (
             "school.name,"
             "school.city,"
