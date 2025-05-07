@@ -5,6 +5,7 @@
 #
 import os
 import json
+from datetime import datetime, timezone
 from services.college_scorecard_service import direct_api_query
 from utils.fragment_generator import generate_fragments
 
@@ -29,16 +30,19 @@ def collect_diverse_schools(name_fragments):
     print(f"✅ Collected {len(all_schools)} unique schools.")
     return all_schools
 
-def save_to_cache(schools, filepath="data/cached_schools.json"):
-    """
-    Saves the list of unique schools to a JSON file.
-    """
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(schools, f, indent=2)
-    print(f"💾 Saved {len(schools)} schools to {filepath}")
+def save_to_segmented_cache(fragment, schools, filepath="data/cached_schools.json"):
+    cache = {}
 
-if __name__ == "__main__":
-    fragments = generate_fragments()
-    school_data = collect_diverse_schools(fragments)
-    save_to_cache(school_data)
+    if os.path.exists(filepath):
+        with open(filepath, "r", encoding="utf-8") as f:
+            cache = json.load(f)
+
+    cache[fragment] = {
+        "last_updated": datetime.now(timezone.utc).isoformat(),
+        "schools": schools
+    }
+
+    with open(filepath, "w", encoding="utf-8") as f:
+        json.dump(cache, f, indent=2)
+
+    print(f"✅ Saved {len(schools)} schools to {filepath}")

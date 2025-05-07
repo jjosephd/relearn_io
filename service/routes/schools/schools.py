@@ -3,7 +3,7 @@ import json
 from flask import jsonify, Blueprint, request
 
 from services.college_filtering import filter_schools
-from services.cache_loader import load_cached_schools  # New cache loader
+from services.cache_loader import load_all_cached_schools  # New cache loader
 from services.cache_loader import is_cache_hit
 
 from services.college_scorecard_service import query_college_scorecard
@@ -45,7 +45,7 @@ def discover_schools():
         return jsonify({"error": "max_tuition must be a number"}), 400
 
     print("📦 Trying cache first...")
-    raw_schools = load_cached_schools()
+    raw_schools = load_all_cached_schools()
 
     filtered = filter_schools(raw_schools, state=state, program=program, max_tuition=max_tuition)
 
