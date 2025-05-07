@@ -6,7 +6,7 @@ import requests
 COLLEGE_API_KEY = os.getenv("COLLEGE_API_KEY")
 BASE_URL = "https://api.data.gov/ed/collegescorecard/v1/schools"
 
-def query_college_scorecard(per_page=100):
+def query_college_scorecard(per_page=100, school_name=None):
     params = {
         "api_key": COLLEGE_API_KEY,
         "school.name": "tech",  # Required pseudo-filter to get general results
