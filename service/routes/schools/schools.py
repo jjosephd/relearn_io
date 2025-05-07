@@ -4,6 +4,10 @@ from flask import jsonify, Blueprint, request
 
 from services.college_filtering import filter_schools
 from services.cache_loader import load_cached_schools  # New cache loader
+from services.cache_loader import is_cache_hit
+
+from services.college_scorecard_service import query_college_scorecard
+from services.college_scorecard_service import direct_api_query
 
 school_bp = Blueprint('school_bp', __name__)
 
@@ -24,9 +28,8 @@ def test_college_query():
     """
     Used for debugging direct API calls (NOT used in /discover).
     """
-    from services.college_scorecard_service import query_college_scorecard
     school_name = request.args.get("school_name")
-    results = query_college_scorecard(school_name=school_name)
+    results = direct_api_query(school_name=school_name)
     return jsonify(results), 200
 
 
@@ -44,9 +47,16 @@ def discover_schools():
     except ValueError:
         return jsonify({"error": "max_tuition must be a number"}), 400
 
-    all_schools = load_cached_schools()
+    cached_schools = load_cached_schools()
+    # Check if we can serve this request from cache
+    if is_cache_hit(cached_schools, state=state, program=program):
+        print("⚡ Using cached data")
+        data_source = cached_schools
+    else:
+        print("🔁 Cache miss – querying live API")
+        data_source = query_college_scorecard()
     filtered = filter_schools(
-        all_schools,
+        cached_schools,
         state=state,
         program=program,
         max_tuition=max_tuition
