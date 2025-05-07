@@ -35,7 +35,8 @@ def query_college_scorecard(per_page=100):
         print(f"[College API] Error: {e}")
         return []
     
-def direct_api_query(school_name=None, per_page=10):
+def direct_api_query(school_name=None, program=None, state=None, per_page=100):
+
     """
     Direct query to College Scorecard API with filtering.
     Only used for debugging or /test-query endpoint.
@@ -44,18 +45,18 @@ def direct_api_query(school_name=None, per_page=10):
         raise ValueError("COLLEGE_API_KEY is not set")
 
     params = {
-        "api_key": COLLEGE_API_KEY,
-        "fields": (
-            "school.name,"
-            "school.city,"
-            "school.state,"
-            "latest.admissions.admission_rate.overall,"
-            "latest.cost.tuition.in_state,"
-            "latest.cost.tuition.out_of_state,"
-            "latest.programs.cip_4_digit.title"
-        ),
-        "per_page": per_page
-    }
+    "api_key": COLLEGE_API_KEY,
+    "fields": (
+        "school.name,"
+        "school.city,"
+        "school.state,"
+        "latest.admissions.admission_rate.overall,"
+        "latest.cost.tuition.in_state,"
+        "latest.cost.tuition.out_of_state,"
+        "latest.programs.cip_4_digit.title"
+    ),
+    "per_page": per_page
+}
 
     if school_name:
         params["school.name"] = school_name

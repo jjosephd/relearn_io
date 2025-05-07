@@ -35,9 +35,6 @@ def test_college_query():
 
 @school_bp.route('/discover', methods=['GET'])
 def discover_schools():
-    """
-    Filters a locally cached dataset of schools based on query params.
-    """
     state = request.args.get("state")
     program = request.args.get("program")
     max_tuition = request.args.get("max_tuition")
@@ -47,22 +44,21 @@ def discover_schools():
     except ValueError:
         return jsonify({"error": "max_tuition must be a number"}), 400
 
-    cached_schools = load_cached_schools()
-    # Check if we can serve this request from cache
-    if is_cache_hit(cached_schools, state=state, program=program):
-        print("⚡ Using cached data")
-        data_source = cached_schools
-    else:
-        print("🔁 Cache miss – querying live API")
-        data_source = query_college_scorecard()
-    filtered = filter_schools(
-        cached_schools,
-        state=state,
-        program=program,
-        max_tuition=max_tuition
-    )
+    print("📦 Trying cache first...")
+    raw_schools = load_cached_schools()
+
+    filtered = filter_schools(raw_schools, state=state, program=program, max_tuition=max_tuition)
+
+    if filtered:
+        print(f"✅ Found {len(filtered)} from cache")
+        return jsonify({"count": len(filtered), "schools": filtered}), 200
+
+    print("🔁 Cache miss. Falling back to live API...")
+
+    live_data = direct_api_query(state=state, program=program)
+    filtered_live = filter_schools(live_data, state=state, program=program, max_tuition=max_tuition)
 
     return jsonify({
-        "count": len(filtered),
-        "schools": filtered
+        "count": len(filtered_live),
+        "schools": filtered_live
     }), 200

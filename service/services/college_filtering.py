@@ -1,42 +1,52 @@
 def filter_schools(schools, state=None, program=None, max_tuition=None):
+    """
+    Filters the list of schools based on optional state, program, and tuition cap.
+    Returns a simplified structure including only the matched program.
+    """
     filtered = []
 
     for school in schools:
         try:
-            name = school.get("school.name", "N/A")
-            school_state = school.get("school.state", "").upper()
-
-            print(f"\n📘 Checking: {name} ({school_state})")
-
-            # Filter by state
-            if state and school_state != state.upper():
-                print(" ❌ Skipped: State mismatch")
+            # State filter
+            if state and school.get("school.state") != state.upper():
                 continue
 
-            # Filter by tuition
+            # Tuition filter (in-state only for now)
             tuition = school.get("latest.cost.tuition.in_state")
-            if max_tuition:
-                if tuition is None:
-                    print(" ❌ Skipped: Tuition missing")
-                    continue
-                if not isinstance(tuition, (int, float)) or tuition > max_tuition:
-                    print(f" ❌ Skipped: Tuition too high → ${tuition}")
-                    continue
+            if max_tuition and (not isinstance(tuition, (int, float)) or tuition > max_tuition):
+                continue
 
-            # Filter by program
+            # Program filter
+            matched_program = None
             if program:
                 programs = school.get("latest.programs.cip_4_digit", [])
-                match = any(p.get("title") == program for p in programs)
-                if not match:
-                    print(" ❌ Skipped: Program not offered")
+                for p in programs:
+                    title = p.get("title", "").lower()
+                    if program.lower() in title:
+                        matched_program = p.get("title")
+                        break
+
+                if not matched_program:
+                    print(f"❌ Skipped: Program '{program}' not found")
                     continue
 
-            print(" ✅ Included")
-            filtered.append(school)
+            # Append simplified and relevant data
+            filtered.append({
+                "school_name": school.get("school.name"),
+                "city": school.get("school.city"),
+                "state": school.get("school.state"),
+                "in_state_tuition": tuition,
+                "out_of_state_tuition": school.get("latest.cost.tuition.out_of_state"),
+                "admission_rate": school.get("latest.admissions.admission_rate.overall"),
+                "matched_program": matched_program if matched_program else None
+            })
 
+        except KeyError as e:
+            print(f'Error filtering school: missing key {e}')
+        except TypeError as e:
+            print(f'Error filtering school: type error {e}')
         except Exception as e:
-            print(f" ⚠️ Error on {name}: {e}")
-            continue
+            print(f"Unexpected error filtering school: {e}")
+            raise
 
-    print(f"\n🎯 Final filtered count: {len(filtered)}")
     return filtered
