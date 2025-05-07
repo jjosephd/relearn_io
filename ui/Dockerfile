@@ -7,8 +7,8 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build  # builds into /dist
+RUN npm run build
 
 RUN npm install -g serve
-CMD ["serve", "-s", "dist"]  
 EXPOSE 3000
+CMD ["serve", "-s", "dist"]

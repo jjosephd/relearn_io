@@ -3,7 +3,7 @@ services:
     build:
       context: ./service
     ports:
-      - '5001:5000'
+      - '5001:5000' # maps host:container
     volumes:
       - ./service:/app
     environment:
@@ -14,7 +14,8 @@ services:
       context: ./ui
     ports:
       - '3000:3000'
-    volumes:
-      - ./ui:/app
+
+    ##volumes:
+    ## - ./ui:/app
     environment:
       - CHOKIDAR_USEPOLLING=true
