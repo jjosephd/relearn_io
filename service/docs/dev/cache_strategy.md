@@ -57,6 +57,10 @@ python -m cache.cache_schools
 
  Add random page sampling (page=2,3,4...) to catch more unique schools
 
+ Add region/state based cache expansion
+
+ Add Search improvements and personalization
+
  Track states already cached to ensure coverage
 
  Add TTL-based cache invalidation (e.g., refresh every 7 days)
