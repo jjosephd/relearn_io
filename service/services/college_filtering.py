@@ -1,6 +1,6 @@
-def filter_schools(schools, state=None, program=None, max_tuition=None):
+def filter_schools(schools, state=None, program=None, max_tuition=None, school_name=None):
     """
-    Filters the list of schools based on optional state, program, and tuition cap.
+    Filters the list of schools based on optional state, program, tuition cap, and school name.
     Returns a simplified structure including only the matched program.
     """
     filtered = []
@@ -28,6 +28,13 @@ def filter_schools(schools, state=None, program=None, max_tuition=None):
 
                 if not matched_program:
                     print(f"❌ Skipped: Program '{program}' not found")
+                    continue
+
+            # School name filter (partial match, case-insensitive)
+            if school_name:
+                name = school.get("school.name", "").lower()
+                if school_name.lower() not in name:
+                    print(f"❌ Skipped: School name '{school_name}' not in '{name}'")
                     continue
 
             # Append simplified and relevant data
