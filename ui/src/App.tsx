@@ -3,7 +3,6 @@ import './styles/App.css';
 import NavBar from './components/NavBar';
 import About from './components/About';
 import Home from './components/Home/Home';
-import Search from './components/Search/Search';
 function App() {
   return (
     <>
@@ -11,7 +10,6 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="/explore/:schoolName?" element={<Search />} />
         </Route>
       </Routes>
     </>

@@ -1,2 +1,5 @@
 .venv
 .env
+
+# cache
+data/cached_schools.json
