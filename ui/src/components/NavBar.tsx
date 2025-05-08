@@ -67,8 +67,8 @@ const NavBar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/Explore" className="nav-link hover-effect m-2">
-                Explore
+              <Link to="/discover" className="nav-link hover-effect m-2">
+                Discover
               </Link>
             </li>
           </ul>

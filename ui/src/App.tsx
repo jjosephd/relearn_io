@@ -3,16 +3,16 @@ import './styles/App.css';
 import NavBar from './components/NavBar';
 import About from './components/About';
 import Home from './components/Home/Home';
+import Discover from './pages/Discover';
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-        </Route>
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="discover" element={<Discover />} />
+      </Route>
+    </Routes>
   );
 }
 

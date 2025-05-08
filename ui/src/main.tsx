@@ -5,6 +5,7 @@ import App from './App.tsx';
 import { BrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { Provider as ChakraProvider } from './components/ui/provider.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
