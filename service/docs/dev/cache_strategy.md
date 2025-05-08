@@ -67,3 +67,42 @@ python -m cache.cache_schools
 
  Smart fallback: use live API only when cache returns 0 results
 ```
+
+---
+
+# 🔁 Cache Refresher Job
+
+## Overview
+
+This job updates a segment of `cached_schools.json` by rotating through name fragments (e.g., "tech", "state", "college"). It ensures data freshness while minimizing API usage.
+
+## How It Works
+
+- Fragments are sorted by `last_updated`.
+- The job tries each fragment in order.
+- If the API returns results, that segment is saved to cache.
+- If not, it moves on to the next fragment (fallback).
+- Only one segment is refreshed per run.
+
+## Why It Matters
+
+This design:
+
+- Avoids full cache rewrites
+- Stays under API rate limits
+- Ensures at least one update per day
+- Makes the cache gradually more complete
+
+## Scheduling (Weekly Cron)
+
+To keep costs low and data fresh (given College Scorecard’s slow update cycle):
+
+````cron
+0 4 * * 1 cd /path/to/app/service && PYTHONPATH=. python services/refresh_cache_job.py >> logs/refresh.log 2>&1
+
+
+## Running Manually
+
+```bash
+PYTHONPATH=. python services/refresh_cache_job.py
+````

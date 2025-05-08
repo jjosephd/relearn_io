@@ -3,6 +3,10 @@ import json
 from services.college_scorecard_service import direct_api_query
 from cache.cache_schools import save_to_segmented_cache
 from utils.fragment_generator import generate_fragments
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 def refresh_next_fragment():
     filepath = "data/cached_schools.json"

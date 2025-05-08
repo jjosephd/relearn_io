@@ -3,6 +3,12 @@
 # local JSON file (cached_schools.json) so that your app can filter school data locally
 # without needing constant API calls.
 #
+
+# 🛑 Developer Note:
+# Only run this script during initial development or cache reset.
+# DO NOT use in production deployments.
+
+
 import os
 import json
 from datetime import datetime, timezone
@@ -46,3 +52,16 @@ def save_to_segmented_cache(fragment, schools, filepath="data/cached_schools.jso
         json.dump(cache, f, indent=2)
 
     print(f"✅ Saved {len(schools)} schools to {filepath}")
+
+if __name__ == "__main__":
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    fragments = generate_fragments()
+    school_data = collect_diverse_schools(fragments)
+
+    if school_data:
+        save_to_segmented_cache("bulk_seed", school_data)
+        print("✅ Initial bulk seed saved.")
+    else:
+        print("❌ No school data returned during bulk collection.")
