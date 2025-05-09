@@ -4,7 +4,6 @@ import ChatDisplay from '../components/ChatDisplay';
 import ChatBox from '../components/ChatBox';
 import ResultCards from '../components/ResultCards';
 import Spinner from '../components/Spinner';
-import { Message } from '../types/messages';
 
 interface Message {
   role: 'user' | 'ai';
@@ -73,7 +72,11 @@ const Discover = () => {
   return (
     <div className="w-full flex flex-col items-center p-4">
       <ChatDisplay messages={messages} />
-      <ChatBox onSend={handleUserMessage} locked={locked} />
+      <ChatBox
+        onSend={handleUserMessage}
+        locked={locked}
+        setLocked={setLocked}
+      />
       {loading && <Spinner />}
       {schools.length > 0 && <ResultCards schools={schools} />}
     </div>

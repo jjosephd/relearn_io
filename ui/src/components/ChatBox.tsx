@@ -4,9 +4,10 @@ import { PaperAirplaneIcon } from '@heroicons/react/24/outline';
 interface Props {
   onSend: (message: string) => void;
   locked: boolean;
+  setLocked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ChatBox: React.FC<Props> = ({ onSend, locked }) => {
+const ChatBox: React.FC<Props> = ({ onSend, locked, setLocked }) => {
   const [message, setMessage] = useState('');
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -14,6 +15,10 @@ const ChatBox: React.FC<Props> = ({ onSend, locked }) => {
       e.preventDefault();
       handleSubmit();
     }
+  };
+
+  const toggleLockedChat = () => {
+    setLocked(!locked);
   };
 
   const handleSubmit = () => {
@@ -46,7 +51,7 @@ const ChatBox: React.FC<Props> = ({ onSend, locked }) => {
             className={`btn ${
               locked ? 'btn-outline' : 'btn-ghost'
             } border-emerald-500 text-white`}
-            onClick={() => alert('Lock toggled (implement state in parent)')}
+            onClick={() => toggleLockedChat()}
           >
             🔒
           </button>
