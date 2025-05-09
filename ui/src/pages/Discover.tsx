@@ -34,12 +34,12 @@ const Discover = () => {
     });
 
     const newMessages = [...messages, createMessage('user', input)];
-
     setMessages(newMessages);
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/schools/query', {
+      // Call OpenAI-backed endpoint
+      const response = await axios.post('http://localhost:5000/ai/ask', {
         query: input,
       });
 
