@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {
+  ChatBubbleLeftIcon,
+  UserIcon,
+  InformationCircleIcon,
+} from '@heroicons/react/24/solid';
 
 interface Message {
-  role: 'user' | 'ai';
+  role: 'user' | 'ai' | 'none';
   content: string;
 }
 
@@ -10,16 +15,67 @@ interface Props {
 }
 
 const ChatDisplay: React.FC<Props> = ({ messages }) => {
+  const [showRawMap, setShowRawMap] = useState<Record<number, boolean>>({});
+
+  const toggleRaw = (idx: number) => {
+    setShowRawMap((prev) => ({ ...prev, [idx]: !prev[idx] }));
+  };
+
   return (
-    <div className="w-full max-w-3xl mb-6 overflow-y-auto h-96 bg-base-100 rounded-box p-4 shadow-inner">
-      {messages.map((msg, idx) => (
-        <div
-          key={idx}
-          className={`chat ${msg.role === 'user' ? 'chat-end' : 'chat-start'}`}
-        >
-          <div className="chat-bubble">{msg.content}</div>
-        </div>
-      ))}
+    <div className="w-full max-w-3xl mb-6 overflow-y-auto h-[60vh] rounded-xl  p-4 space-y-4">
+      {messages.map((msg, idx) => {
+        const isAssistant = msg.role === 'ai';
+        const isUser = msg.role === 'user';
+        const isInfo = msg.role === 'none';
+        const showRaw = showRawMap[idx];
+
+        const bgColor = isAssistant
+          ? 'bg-[#1e293b]' // assistant
+          : isInfo
+          ? 'bg-[#334155] border border-slate-600'
+          : 'bg-[#]'; // user
+
+        const icon = isAssistant ? (
+          <div className="flex-shrink-0 p-2 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 shadow-lg w-10 h-10 flex items-center justify-center">
+            <ChatBubbleLeftIcon className="text-white w-5 h-5" />
+          </div>
+        ) : isInfo ? (
+          <div className="p-2 rounded-full bg-slate-600 w-10 h-10 flex items-center justify-center">
+            <InformationCircleIcon className="text-white w-5 h-5" />
+          </div>
+        ) : (
+          <div className="p-2 rounded-full bg-gray-600 w-10 h-10 flex items-center justify-center">
+            <UserIcon className="text-white w-5 h-5" />
+          </div>
+        );
+
+        return (
+          <div
+            key={idx}
+            className={`flex items-start gap-4 p-4 rounded-xl shadow-md ${bgColor}`}
+          >
+            {icon}
+            <div className="flex-1">
+              <div className="flex justify-between items-center mb-1">
+                <p className="text-sm font-semibold text-gray-300 capitalize">
+                  {msg.role === 'none' ? 'System' : msg.role}
+                </p>
+                {isAssistant && (
+                  <button
+                    className="text-xs text-emerald-400 underline"
+                    onClick={() => toggleRaw(idx)}
+                  >
+                    {showRaw ? 'Hide Raw' : 'Show Raw'}
+                  </button>
+                )}
+              </div>
+              <div className="text-[15px] leading-relaxed text-white whitespace-pre-wrap">
+                {msg.content}
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

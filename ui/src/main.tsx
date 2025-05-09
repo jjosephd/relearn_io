@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { Provider as ChakraProvider } from './components/ui/provider.tsx';
 
+document.documentElement.classList.add('dark');
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <StrictMode>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PaperAirplaneIcon } from '@heroicons/react/24/outline';
 
 interface Props {
   onSend: (message: string) => void;
@@ -6,34 +7,51 @@ interface Props {
 }
 
 const ChatBox: React.FC<Props> = ({ onSend, locked }) => {
-  const [input, setInput] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
+    }
+  };
 
   const handleSubmit = () => {
-    if (!input.trim() || locked) return;
-    onSend(input.trim());
-    setInput('');
+    if (!message.trim() || locked) return;
+    onSend(message.trim());
+    setMessage('');
   };
 
   return (
-    <div className="w-full max-w-3xl flex items-center gap-2">
-      <input
-        type="text"
-        className="input input-bordered flex-grow"
-        placeholder="Tell us what you're looking for..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-        disabled={locked}
-      />
-      <button className="btn btn-primary" onClick={handleSubmit} disabled={locked}>
-        ✉️
-      </button>
-      <button
-        className={`btn ${locked ? 'btn-outline' : 'btn-ghost'}`}
-        onClick={() => alert('Lock toggled (implement state in parent)')}
-      >
-        🔒
-      </button>
+    <div className="flex flex-col w-full max-w-3xl fixed bottom-0 p-4">
+      <div className="flex items-start gap-2 w-full">
+        <textarea
+          className="textarea bg-[#0f172a] text-white border border-emerald-400 w-full resize-none focus:outline-none"
+          placeholder="Tell us what you're looking for..."
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleKeyDown}
+          disabled={locked}
+          rows={3}
+        />
+        <div className="flex flex-col gap-2 mt-1">
+          <button
+            className="btn btn-xs bg-[#9333ea] hover:bg-[#7e22ce] text-white border-0 shadow-md"
+            onClick={handleSubmit}
+            disabled={locked}
+          >
+            <PaperAirplaneIcon className=" w-3 h-3" />
+          </button>
+          <button
+            className={`btn ${
+              locked ? 'btn-outline' : 'btn-ghost'
+            } border-emerald-500 text-white`}
+            onClick={() => alert('Lock toggled (implement state in parent)')}
+          >
+            🔒
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
