@@ -8,9 +8,27 @@ from services.cache_loader import is_cache_hit
 
 from services.college_scorecard_service import query_college_scorecard
 from services.college_scorecard_service import direct_api_query
+from services.openai_parser import parse_filters_with_openai
 
 school_bp = Blueprint('school_bp', __name__)
 
+
+@school_bp.route('/query', methods=['POST'])
+def query_chatbot():
+    data = request.get_json()
+    user_query = data.get("query", "")
+
+    try:
+        filters = parse_filters_with_openai(user_query)
+        return {
+            "filters": filters,
+            "explanation": f"We interpreted your query as: {filters}"
+        }
+    except Exception as e:
+        return {
+            "filters": {},
+            "explanation": "Sorry, we couldn't understand your request."
+        }, 500
 
 @school_bp.route('/discover', methods=['GET'])
 def discover_schools():

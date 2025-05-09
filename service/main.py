@@ -16,13 +16,18 @@ from flask import Flask
 from dotenv import load_dotenv
 from routes.schools.schools import school_bp
 from flask_cors import CORS
+from routes.ask.ask import ask_bp
+import openai
+import os 
 
 load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = Flask(__name__)
 CORS(app, origins="http://localhost:5173", supports_credentials=True)
 
 app.register_blueprint(school_bp, url_prefix='/schools')
+app.register_blueprint(ask_bp, url_prefix='/ai')
 
 if __name__ == '__main__':
     app.run(debug=True)
