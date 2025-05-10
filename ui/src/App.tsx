@@ -2,7 +2,7 @@ import { Outlet, Route, Routes } from 'react-router';
 import './styles/App.css';
 import NavBar from './components/NavBar';
 import About from './components/About';
-import Home from './components/Home/Home';
+import Home from './pages/Home/Home';
 import Discover from './pages/Discover';
 function App() {
   return (

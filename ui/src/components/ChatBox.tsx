@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { PaperAirplaneIcon } from '@heroicons/react/24/outline';
-
+import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import { LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/solid';
 interface Props {
   onSend: (message: string) => void;
   locked: boolean;
@@ -39,7 +39,7 @@ const ChatBox: React.FC<Props> = ({ onSend, locked, setLocked }) => {
           disabled={locked}
           rows={3}
         />
-        <div className="flex flex-col gap-2 mt-1">
+        <div className="flex flex-col pt-2 gap-2 mt-1">
           <button
             className="btn btn-xs bg-[#9333ea] hover:bg-[#7e22ce] text-white border-0 shadow-md"
             onClick={handleSubmit}
@@ -48,12 +48,16 @@ const ChatBox: React.FC<Props> = ({ onSend, locked, setLocked }) => {
             <PaperAirplaneIcon className=" w-3 h-3" />
           </button>
           <button
-            className={`btn ${
+            className={`btn btn-xs ${
               locked ? 'btn-outline' : 'btn-ghost'
             } border-emerald-500 text-white`}
             onClick={() => toggleLockedChat()}
           >
-            🔒
+            {locked ? (
+              <LockClosedIcon className="w-3 h-3" />
+            ) : (
+              <LockOpenIcon className="w-3 h-3" />
+            )}
           </button>
         </div>
       </div>

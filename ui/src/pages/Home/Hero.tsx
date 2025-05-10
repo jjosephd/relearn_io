@@ -6,7 +6,9 @@ const Hero = () => {
     <div className="hero flex flex-col items-center w-full min-h-[80vh] px-4 justify-evenly">
       <div className="container">
         <div className="text-effect text-4xl text-center font-semibold md:text-5xl mb-4">
-          A Fresh Restart
+          Go back to school,
+          <br />
+          <div className="">without starting over</div>
         </div>
         <div className="text-shadow text-slate-50 text-xs text-center mb-4">
           The platform built to help you get back on track

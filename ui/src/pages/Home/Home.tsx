@@ -4,8 +4,6 @@ import generatedLearn from '../../assets/generated-learn.png';
 import scholarshipFigure from '../../assets/scholarship-figure.png';
 import '../../styles/Home.css';
 import Card from './Card';
-import PieData from '../Chart/PieData';
-import Features from '../Features/Features';
 
 const Home = () => {
   const { ref, inView } = useInView({
@@ -71,16 +69,8 @@ const Home = () => {
                 <h2 className="text-4xl font-bold mb-4 text-center">
                   Did You Know
                 </h2>
-                <div className="flex flex-col md:flex-row justify-center items-center">
-                  <PieData />
-                  <PieData />
-                  <PieData />
-                </div>
               </div>
             </div>
-          </div>
-          <div className="">
-            <Features />
           </div>
         </main>
       </div>
