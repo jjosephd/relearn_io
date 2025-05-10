@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
-import menuIcon from '../assets/icons/menuIcon.svg';
-import capIcon from '../assets/icons/capIcon.svg';
 import { Link } from 'react-router-dom';
+
+import capIcon from '../assets/icons/capIcon.svg';
+import MenuButton from './nav/MenuButton';
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +32,7 @@ const NavBar = () => {
       justify-between items-center p-2 w-full fixed z-50 top-0 transition-all duration-300 
       ${isScrolled ? 'backdrop-blur-sm bg-black/50' : ''}`}
       >
-        <div className=" flex flex-row items-center w-1/4">
+        <div className=" flex flex-row items-center ">
           <div className="cap-icon border rounded-full h-[1.5rem] w-[1.5rem] flex items-center justify-center bg-emerald-300/80 mx-1">
             <img src={capIcon} alt="" className="size-4 font-extrabold" />
           </div>
@@ -73,10 +76,10 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
+        <div className=" md:hidden ">
+          <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
+        </div>
 
-        <button>
-          <img src={menuIcon} alt="" className="size-4 md:hidden" />
-        </button>
         <div className="btn-container hidden md:flex gap-2 px-4">
           <Link
             to="/"
