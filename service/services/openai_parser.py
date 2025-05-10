@@ -1,8 +1,13 @@
 # services/openai_parser.py
 import os
-from openai import OpenAI
 import json
+from dotenv import load_dotenv
+from openai import OpenAI
 
+# Load environment variables from .env
+load_dotenv()
+
+# Set up the OpenAI client
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def parse_filters_with_openai(user_query: str) -> dict:
