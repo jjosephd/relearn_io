@@ -1,7 +1,7 @@
 import { Outlet, Route, Routes } from 'react-router';
 import './styles/App.css';
 import NavBar from './components/NavBar';
-import About from './components/About';
+import About from './pages/About';
 import Home from './pages/Home/Home';
 import Discover from './pages/Discover';
 function App() {
