@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { EnvelopeIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
