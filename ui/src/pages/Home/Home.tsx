@@ -1,8 +1,5 @@
 import { useInView } from 'react-intersection-observer';
 import Hero from './Hero';
-import generatedLearn from '../../assets/generated-learn.png';
-import scholarshipFigure from '../../assets/scholarship-figure.png';
-import '../../styles/Home.css';
 import Card from './Card';
 import {
   SparklesIcon,
@@ -47,49 +44,59 @@ const featureCards = [
 
 const Home = () => {
   const { ref, inView } = useInView({
-    triggerOnce: false, // Set to true if you want to load the component only once
-    threshold: 0.1, // Adjust based on when you want to trigger the visibility
+    triggerOnce: false,
+    threshold: 0.1,
   });
+
   return (
-    <>
-      <div className="">
-        <div className="hero-layout flex flex-col  w-full">
-          <header>
-            <Hero />
-          </header>
-        </div>
-        <main>
-          <div className="main-layout">
-            <div className="mb-12">
-              <div className="w-full">
-                <section className="py-10 px-4 md:px-12 ">
-                  <h2 className="text-2xl font-bold text-slate-100 mb-6">
-                    What Relearn Offers
-                  </h2>
-                  <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
-                    {featureCards.map((feature) => (
-                      <Card
-                        key={feature.title}
-                        title={feature.title}
-                        description={feature.description}
-                        icon={feature.icon}
-                      />
-                    ))}
-                  </div>
-                </section>
-              </div>
-            </div>
-            <div className="chart-area">
-              <div className="chart-layout w-full h-full flex flex-col">
-                <h2 className="text-4xl font-bold mb-4 text-center">
-                  Sign Up Component
-                </h2>
-              </div>
-            </div>
-          </div>
-        </main>
+    <div className="w-full">
+      {/* Hero Section */}
+      <div className="w-full">
+        <Hero />
       </div>
-    </>
+
+      {/* Full-width accent section with SVG and cards */}
+      <section className="relative bg-accent w-screen overflow-hidden pb-20">
+        {/* SVG divider at the top */}
+        <div className="absolute top-0 left-0 w-screen overflow-hidden leading-none z-10">
+          <svg
+            className="w-full h-16"
+            viewBox="0 0 1440 100"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+          >
+            <path
+              fill="#ffffff"
+              d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,0 L0,0 Z"
+            />
+          </svg>
+        </div>
+
+        {/* Card grid content */}
+        <div className="relative z-20 max-w-7xl mx-auto pt-24 px-4 md:px-12">
+          <h2 className="text-2xl font-bold text-slate-100 mb-6 text-center">
+            What Relearn Offers
+          </h2>
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+            {featureCards.map((feature) => (
+              <Card
+                key={feature.title}
+                title={feature.title}
+                description={feature.description}
+                icon={feature.icon}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Placeholder for next section */}
+      <section className="w-full px-4 py-16">
+        <h2 className="text-4xl font-bold mb-4 text-center">
+          Sign Up Component
+        </h2>
+      </section>
+    </div>
   );
 };
 

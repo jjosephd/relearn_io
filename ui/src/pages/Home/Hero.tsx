@@ -1,7 +1,17 @@
 import { Link } from 'react-router-dom';
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
 
 const Hero = () => {
+  const [email, setEmail] = useState('');
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
   return (
     <div className="hero flex flex-col items-center w-full min-h-[80vh] px-4 justify-evenly">
       <div className="container">
@@ -14,41 +24,32 @@ const Hero = () => {
           </div>
           <div className="text-lg">Get started without the guesswork</div>
         </div>
-        <div className="text-shadow text-slate-50 text-xs text-center mb-4">
-          The platform built to help you get back on track
-        </div>
       </div>
-      <div className="flex flex-col md:flex-row w-full px-2 md:px-1 gap-4  justify-center">
-        <Link
-          to="/"
-          className="btn rounded-full border-0  bg-emerald-300 text-black hover:bg-emerald-400 ease-in duration-300 shadow-emerald-300/20 shadow-xl"
-        >
-          <AcademicCapIcon className="h-4 w-4 " />
-          <span className="">Get Started</span>
-        </Link>
-        <Link
-          to="/"
-          className="btn btn-ghost hover:bg-emerald-300/10 ease-in duration-300 border-emerald-300 rounded-full shadow-xl shadow-emerald-300/20"
-          prefetch="viewport"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="oklch(0.845 0.143 164.978)"
-            className="size-4"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
-            />
-          </svg>
 
-          <span className="text-emerald-300">Learn More</span>
-        </Link>
-      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 px-2 md:px-1 justify-center"
+      >
+        <div className="relative w-full">
+          <EnvelopeIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none" />
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="pl-10 pr-4 py-2 rounded outline-none border-2 border-r-4 border-b-4 border-black w-full"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="btn rounded border-2 bg-primary text-black hover:bg-primary/80 ease-in duration-300 btn-outline border-r-4 border-b-4  border-black"
+        >
+          <AcademicCapIcon className="h-4 w-4" />
+          <span className="uppercase">Join the waitlist</span>
+        </button>
+      </form>
+
       <div className="container">
         <div className="container flex flex-col items-center justify-center  p-12">
           <h1 className="text-xl text-center font-extralight text-shadow md:w-3/4">
