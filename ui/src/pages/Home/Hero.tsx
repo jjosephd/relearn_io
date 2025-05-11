@@ -5,10 +5,14 @@ const Hero = () => {
   return (
     <div className="hero flex flex-col items-center w-full min-h-[80vh] px-4 justify-evenly">
       <div className="container">
-        <div className="text-effect text-4xl text-center font-semibold md:text-5xl mb-4">
-          Go back to school,
-          <br />
-          <div className="">without starting over</div>
+        <div className="font-bold text-4xl text-center md:text-4xl mb-4 uppercase">
+          Start again,
+          <div className="relative inline-block">
+            {' '}
+            <span className="relative z-10">smarter</span>
+            <div className="absolute bottom-0 right-0  h-1/2 w-3/4 bg-accent z-0"></div>
+          </div>
+          <div className="text-lg">Get started without the guesswork</div>
         </div>
         <div className="text-shadow text-slate-50 text-xs text-center mb-4">
           The platform built to help you get back on track

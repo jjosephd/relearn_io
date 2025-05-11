@@ -4,6 +4,46 @@ import generatedLearn from '../../assets/generated-learn.png';
 import scholarshipFigure from '../../assets/scholarship-figure.png';
 import '../../styles/Home.css';
 import Card from './Card';
+import {
+  SparklesIcon,
+  DocumentTextIcon,
+  CurrencyDollarIcon,
+  InboxIcon,
+  AcademicCapIcon,
+} from '@heroicons/react/24/outline';
+
+const featureCards = [
+  {
+    title: 'Personalized Guidance',
+    description:
+      'A conversational assistant that asks a few key questions (like your goals and schedule) and gives tailored school recommendations.',
+    icon: <SparklesIcon className="h-10 w-10" />,
+  },
+  {
+    title: 'Resume & App Help',
+    description:
+      'Get AI feedback on your resume and applications to confidently submit strong materials tailored to your target programs.',
+    icon: <DocumentTextIcon className="h-10 w-10" />,
+  },
+  {
+    title: 'Financial Aid Explainer',
+    description:
+      'Understand scholarships, grants, and aid eligibility in plain English — with comparisons built from real school data.',
+    icon: <CurrencyDollarIcon className="h-10 w-10" />,
+  },
+  {
+    title: 'Email Summarizer',
+    description:
+      'Connect Gmail to summarize confusing advisor threads and even auto-draft polite responses when needed.',
+    icon: <InboxIcon className="h-10 w-10" />,
+  },
+  {
+    title: 'School Discovery Tool',
+    description:
+      'Search and filter programs that match your lifestyle — online, self-paced, budget-friendly — all from verified databases.',
+    icon: <AcademicCapIcon className="h-10 w-10" />,
+  },
+];
 
 const Home = () => {
   const { ref, inView } = useInView({
@@ -22,52 +62,27 @@ const Home = () => {
           <div className="main-layout">
             <div className="mb-12">
               <div className="w-full">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full place-items-center md:flex md:flex-row md:justify-between">
-                  <Card
-                    title={
-                      ' 11% Of All Adults in the U.S Are Interested in Returning to School'
-                    }
-                    description={
-                      <p>
-                        Navigate Your Learning Path with{' '}
-                        <span className="font-semibold">Ease: </span>
-                        Everything You Need, All in One Spot
-                      </p>
-                    }
-                    imgUrl={generatedLearn}
-                  />
-                  <Card
-                    title={' Flip the Script: Career Moves That Pay Off'}
-                    description={
-                      <p>
-                        A survey conducted by BrainManager.io revealed that
-                        90.91% of individuals who changed careers reported
-                        experiencing a salary increase.
-                      </p>
-                    }
-                    imgUrl={scholarshipFigure}
-                  />
-
-                  <Card
-                    title={
-                      ' 11% Of All Adults in the U.S Are Interested in Returning to School'
-                    }
-                    description={
-                      <p>
-                        Navigate Your Learning Path with{' '}
-                        <span className="font-semibold">Ease: </span>
-                        Everything You Need, All in One Spot
-                      </p>
-                    }
-                    imgUrl={generatedLearn}
-                  />
-                </div>
+                <section className="py-10 px-4 md:px-12 ">
+                  <h2 className="text-2xl font-bold text-slate-100 mb-6">
+                    What Relearn Offers
+                  </h2>
+                  <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+                    {featureCards.map((feature) => (
+                      <Card
+                        key={feature.title}
+                        title={feature.title}
+                        description={feature.description}
+                        icon={feature.icon}
+                      />
+                    ))}
+                  </div>
+                </section>
               </div>
             </div>
             <div className="chart-area">
               <div className="chart-layout w-full h-full flex flex-col">
                 <h2 className="text-4xl font-bold mb-4 text-center">
-                  Did You Know
+                  Sign Up Component
                 </h2>
               </div>
             </div>

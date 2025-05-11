@@ -20,11 +20,14 @@ function App() {
 const Layout = () => {
   return (
     <>
-      <div className="min-h-screen overflow-x-hidden hero-gradient bg-black flex flex-col">
-        <div>
+      <div
+        className="min-h-screen overflow-x-hidden bg-base-100 flex flex-col"
+        data-theme="maintheme"
+      >
+        <nav>
           <NavBar />
-        </div>
-        <main className="relative flex flex-col mt-36 items-center">
+        </nav>
+        <main className="relative flex flex-col mt-12 items-center">
           <Outlet />
         </main>
       </div>

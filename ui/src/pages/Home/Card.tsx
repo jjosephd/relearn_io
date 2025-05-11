@@ -1,33 +1,23 @@
 import React from 'react';
+import { JSX } from 'react';
 
-const Card = ({
-  title,
-  description,
-  imgUrl,
-}: {
+interface CardProps {
   title: string;
   description: React.ReactNode;
-  imgUrl: string;
-}) => {
+  icon: JSX.Element;
+}
+
+const Card: React.FC<CardProps> = ({ title, description, icon }) => {
   return (
     <div className="mb-2">
-      <div className="card border-2 border-gray-300/10 shadow-slate-50/10 shadow-lg  p-2 rounded-lg  max-w-[350px] max-h-[420px] font-extralight ">
-        <figure className="mb-12">
-          <img
-            src={imgUrl}
-            alt="Generated Learn"
-            className="w-full h-64 object-cover faded-section"
-          />
-        </figure>
-
-        <div className="flex flex-col justify-center p-1.5 ">
-          <h1 className="card-title text-md font-extralight mb-4 line-clamp-2 ">
-            {title}
-          </h1>
-          <div className=" text-sm text-slate-50/80 mb-2 line-clamp-2 overflow-auto">
-            {description}
-          </div>
+      <div className="card border-2 border-gray-300/10 shadow-slate-50/10 shadow-lg p-4 rounded-lg max-w-[350px] font-light bg-slate-800/20">
+        <div className="flex justify-center items-center mb-6 text-emerald-300 text-4xl">
+          {icon}
         </div>
+        <h1 className="card-title text-lg font-medium mb-3 text-slate-50">
+          {title}
+        </h1>
+        <p className="text-sm text-slate-300">{description}</p>
       </div>
     </div>
   );

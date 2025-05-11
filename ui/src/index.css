@@ -1,6 +1,43 @@
 @import 'tailwindcss';
-@plugin 'daisyui';
+@import 'tailwindcss/utilities';
 
+@import 'tailwindcss';
+@import 'tailwindcss/utilities';
+
+@plugin "daisyui" {
+  themes: relearnlight --default, pastel, dark --prefersdark;
+}
+@plugin "daisyui/theme" {
+  name: 'maintheme';
+
+  color-scheme: light; /* color of browser-provided UI */
+
+  --color-base-100: oklch(98.5% 0.015 100); /* soft white */
+  --color-base-200: oklch(96% 0.01 255); /* very light gray */
+  --color-base-content: oklch(20% 0.02 255); /* dark text */
+
+  --color-primary: oklch(78% 0.18 140); /* bright green from #B2F55E */
+  --color-primary-content: oklch(18% 0.03 140); /* dark content */
+
+  --color-secondary: oklch(88% 0.14 100); /* from #FFE66D */
+  --color-secondary-content: oklch(20% 0.03 100);
+
+  --color-accent: oklch(65% 0.22 300); /* from #A66DD4 */
+  --color-accent-content: oklch(98% 0.01 300);
+
+  --color-neutral: oklch(30% 0.03 240); /* dark neutral from #333333 */
+  --color-neutral-content: oklch(96% 0.01 240);
+
+  --color-info: oklch(70% 0.2 220);
+  --color-info-content: oklch(98% 0.01 220);
+  --color-success: oklch(65% 0.25 140);
+  --color-success-content: oklch(98% 0.01 140);
+  --color-warning: oklch(80% 0.25 80);
+  --color-warning-content: oklch(20% 0.05 80);
+  --color-error: oklch(65% 0.3 30);
+  --color-error-content: oklch(98% 0.01 30);
+  --color--black: oklch(20% 0.02 0);
+}
 body {
   margin: 0;
   padding: 0;

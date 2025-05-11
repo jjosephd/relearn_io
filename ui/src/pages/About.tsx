@@ -30,21 +30,16 @@ const aboutData = [
     imageUrl: 'xxx',
     title: 'Who We Help',
     description: [
-      'College enrollment in the U.S. is declining. Rising costs, unclear job outcomes, and a changing economy have left millions questioning if school is still worth it—especially adults with jobs, kids, or debt.',
-      "But here's what hasn't changed:",
+      'From parents juggling school pickups to first-gen students navigating alone, Pathwise is built for real people with real responsibilities.',
+      'We help:',
       {
         bullets: [
-          '📚 Parents returning to school after a gap',
-
-          '🔁 Working adults pivoting into new industries',
-
-          '🧰 Skilled workers exploring certifications or trades',
-
-          '🧑‍💼 First-generation students navigating the process solo',
+          'Working adults pivoting into new industries',
+          'Skilled workers exploring certifications or trades',
+          'First-generation students navigating the process solo',
+          'Parents returning to school after a gap',
         ],
       },
-      'Pathwise exists to simplify that journey.',
-      'We bring together school data, program comparisons, and financial guidance—powered by AI and built with empathy—so you can choose an educational path that actually fits your life.',
     ],
   },
 ];
