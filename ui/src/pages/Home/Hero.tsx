@@ -1,6 +1,7 @@
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { EnvelopeIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   const [email, setEmail] = useState('');
@@ -17,9 +18,8 @@ const Hero = () => {
         <div className="font-bold text-4xl text-center md:text-4xl mb-4 uppercase">
           Start again,
           <div className="relative inline-block">
-            {' '}
-            <span className="relative z-10">smarter</span>
-            <div className="absolute bottom-0 right-0  h-1/2 w-3/4 bg-accent z-0"></div>
+            <span className="relative z-10"> smarter</span>
+            <div className="absolute bottom-0 right-0  h-1/2 w-3/4 bg-secondary z-0"></div>
           </div>
           <div className="text-lg">Get started without the guesswork</div>
         </div>
@@ -49,17 +49,19 @@ const Hero = () => {
         </button>
       </form>
 
-      <div className="container">
-        <div className="container flex flex-col items-center justify-center  p-12">
-          <h1 className="text-xl text-center font-extralight text-shadow md:w-3/4">
-            Simplifying Your Learning Journey
+      <motion.div
+        className="container"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.4 }} // fires once when 40% in view
+      >
+        <div className="container flex flex-col items-center justify-center p-12">
+          <h1 className="text-xl text-center md:w-3/4">
+            Simplify Your Learning Journey Today!
           </h1>
-          <h2 className="text-sm text-center p-2 font-extralight text-slate-50/50 lg:w-1/2 shadow-md">
-            How you start can go a long way in determining how you finish. Spend
-            less time figuring out how, and more time getting prepared.
-          </h2>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

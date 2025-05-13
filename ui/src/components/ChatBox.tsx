@@ -28,7 +28,7 @@ const ChatBox: React.FC<Props> = ({ onSend, locked, setLocked }) => {
   };
 
   return (
-    <div className="flex flex-col w-full max-w-3xl fixed bottom-0 p-4">
+    <div className="flex flex-col w-full max-w-3xl fixed bottom-0 p-4 z-50">
       <div className="flex items-start gap-2 w-full">
         <textarea
           className="textarea bg-[#0f172a] text-white border border-emerald-400 w-full resize-none focus:outline-none"

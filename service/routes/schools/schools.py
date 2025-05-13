@@ -47,7 +47,6 @@ def discover_schools():
     raw_schools = load_all_cached_schools()
     print(f"📚 Loaded {len(raw_schools)} schools from cache")
 
-    # Fallback to API if cache is totally empty
     if not raw_schools:
         print("⚠️ Cache is empty — falling back to live API")
         live_data = direct_api_query(state=state, program=program, school_name=school_name)
@@ -79,13 +78,31 @@ def discover_schools():
     )
     print(f"🔎 {len(filtered)} school(s) matched filters from cache")
 
+    if len(filtered) == 0:
+        print("⚠️ No cache matches — falling back to live API")
+        live_data = direct_api_query(state=state, program=program, school_name=school_name)
+        filtered_live = filter_schools(
+            live_data,
+            state=state,
+            program=program,
+            max_tuition=max_tuition,
+            school_name=school_name
+        )
+        return jsonify({
+            "count": len(filtered_live),
+            "schools": filtered_live,
+            "from_cache": False,
+            "message": (
+                "No schools matched your search filters."
+                if not filtered_live
+                else f"Found {len(filtered_live)} schools from live API."
+            )
+        }), 200
+
+    # Return filtered cache results
     return jsonify({
         "count": len(filtered),
         "schools": filtered,
         "from_cache": True,
-        "message": (
-            "No schools matched your search filters."
-            if not filtered
-            else f"Found {len(filtered)} schools from cached data."
-        )
+        "message": f"Found {len(filtered)} schools from cached data."
     }), 200

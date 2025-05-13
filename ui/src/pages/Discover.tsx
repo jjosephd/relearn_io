@@ -71,14 +71,16 @@ const Discover = () => {
 
   return (
     <div className="w-full flex flex-col items-center p-4">
-      <ChatDisplay messages={messages} />
+      <ChatDisplay messages={messages} schools={schools} />
+
+      {/* Chat input at the bottom */}
       <ChatBox
         onSend={handleUserMessage}
         locked={locked}
         setLocked={setLocked}
       />
+
       {loading && <Spinner />}
-      {schools.length > 0 && <ResultCards schools={schools} />}
     </div>
   );
 };

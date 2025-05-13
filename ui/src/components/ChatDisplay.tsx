@@ -4,7 +4,7 @@ import {
   UserIcon,
   InformationCircleIcon,
 } from '@heroicons/react/24/solid';
-
+import ResultCards from './ResultCards';
 interface Message {
   role: 'user' | 'ai' | 'none';
   content: string;
@@ -12,9 +12,19 @@ interface Message {
 
 interface Props {
   messages: Message[];
+  schools?: School[];
+}
+interface School {
+  school_name: string;
+  state: string;
+  city?: string;
+  admission_rate?: number;
+  in_state_tuition?: number;
+  out_of_state_tuition?: number;
+  matched_program?: string;
 }
 
-const ChatDisplay: React.FC<Props> = ({ messages }) => {
+const ChatDisplay: React.FC<Props> = ({ messages, schools }) => {
   const [showRawMap, setShowRawMap] = useState<Record<number, boolean>>({});
 
   const toggleRaw = (idx: number) => {
@@ -33,7 +43,7 @@ const ChatDisplay: React.FC<Props> = ({ messages }) => {
           ? 'bg-[#1e293b]' // assistant
           : isInfo
           ? 'bg-[#334155] border border-slate-600'
-          : 'bg-[#]'; // user
+          : 'bg-base-200'; // user
 
         const icon = isAssistant ? (
           <div className="flex-shrink-0 p-2 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 shadow-lg w-10 h-10 flex items-center justify-center">
@@ -45,7 +55,7 @@ const ChatDisplay: React.FC<Props> = ({ messages }) => {
           </div>
         ) : (
           <div className="p-2 rounded-full bg-gray-600 w-10 h-10 flex items-center justify-center">
-            <UserIcon className="text-white w-5 h-5" />
+            <UserIcon className=" w-5 h-5" />
           </div>
         );
 
@@ -57,7 +67,7 @@ const ChatDisplay: React.FC<Props> = ({ messages }) => {
             {icon}
             <div className="flex-1">
               <div className="flex justify-between items-center mb-1">
-                <p className="text-sm font-semibold text-gray-300 capitalize">
+                <p className="text-sm font-semibold text-primary capitalize">
                   {msg.role === 'none' ? 'System' : msg.role}
                 </p>
                 {isAssistant && (
@@ -69,13 +79,18 @@ const ChatDisplay: React.FC<Props> = ({ messages }) => {
                   </button>
                 )}
               </div>
-              <div className="text-[15px] leading-relaxed text-white whitespace-pre-wrap">
+              <div className="text-[15px] leading-relaxed text-primary whitespace-pre-wrap">
                 {msg.content}
               </div>
             </div>
           </div>
         );
       })}
+      {schools && schools.length > 0 && (
+        <div className="mt-4">
+          <ResultCards schools={schools} />
+        </div>
+      )}
     </div>
   );
 };
