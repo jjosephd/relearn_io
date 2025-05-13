@@ -1,12 +1,22 @@
 import { useState } from 'react';
 
+import { ReactNode } from 'react';
+
 interface AboutCardProps {
   imgUrl: string;
   title: string;
   description: (string | { bullets: string[] })[];
+  children?: ReactNode;
+  replaceBullets?: boolean;
 }
 
-const AboutCard = ({ imgUrl, title, description }: AboutCardProps) => {
+const AboutCard = ({
+  imgUrl,
+  title,
+  description,
+  children,
+  replaceBullets = false,
+}: AboutCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpand = () => setExpanded((prev) => !prev);
@@ -27,22 +37,33 @@ const AboutCard = ({ imgUrl, title, description }: AboutCardProps) => {
           }`}
         >
           <div className="space-y-4">
-            {description.map((block, i) =>
-              typeof block === 'string' ? (
-                <p key={i}>{block}</p>
-              ) : (
+            {description.map((block, i) => {
+              if (typeof block === 'string') {
+                return <p key={i}>{block}</p>;
+              }
+
+              // If it's a bullet list and we're replacing it, skip it and show children instead
+              if (replaceBullets) {
+                return children && expanded ? (
+                  <div key={i} className="mt-4">
+                    {children}
+                  </div>
+                ) : null;
+              }
+
+              return (
                 <ul key={i} className="list-disc list-inside space-y-1 pl-4">
                   {block.bullets.map((bullet, idx) => (
                     <li key={idx}>{bullet}</li>
                   ))}
                 </ul>
-              )
-            )}
+              );
+            })}
           </div>
         </div>
       </div>
 
-      <div className="flex justify-center md:hidden">
+      <div className="flex justify-center ">
         <button
           onClick={toggleExpand}
           className=" mt-4 text-sm font-medium text-blue-600  focus:outline-none"

@@ -113,11 +113,6 @@ const Home = () => {
       </section>
 
       {/* Placeholder for next section */}
-      <section className="w-full px-4 py-16">
-        <h2 className="text-4xl font-bold mb-4 text-center">
-          Sign Up Component
-        </h2>
-      </section>
     </div>
   );
 };
