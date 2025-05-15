@@ -34,18 +34,18 @@ const Carousel = ({
       <div className="w-full text-center text-lg font-medium min-h-[4rem]">
         {bullets[currentIndex]}
       </div>
-      <div className="flex justify-center gap-6">
+      <div className="flex justify-center gap-6 mb-4">
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className="btn btn-sm btn-outline"
+          className="btn btn-sm btn-outline border-r-4 border-b-4 border-black"
         >
-          <ArrowLeftIcon className="h-5 w-5" />
+          <ArrowLeftIcon className="h-5 w-5 " />
         </button>
         <button
           onClick={handleNext}
           disabled={currentIndex === bullets.length - 1}
-          className="btn btn-sm btn-outline"
+          className="btn btn-sm btn-outline border-r-4 border-b-4 border-black"
         >
           <ArrowRightIcon className="h-5 w-5" />
         </button>

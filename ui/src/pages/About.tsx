@@ -2,10 +2,14 @@ import { useState } from 'react';
 import AboutCard from '../components/cards/AboutCard';
 import Carousel from '../components/about/Carousel';
 import Steps from '../components/about/Steps';
+import jobOffice from '../assets/about/job_office.jpg';
+import jobWorkers from '../assets/about/job_workers.jpg';
+import jobStudying from '../assets/about/woman_studying.jpg';
+import tutor from '../assets/about/tutor.jpg';
 
 const aboutData = [
   {
-    imageUrl: 'xxx',
+    imageUrl: jobOffice,
     title: 'Our Mission',
     description: [
       'At Pathwise, we help working adults and parents return to school—or pivot to career-ready certifications—without the confusion, cost traps, or wasted time.',
@@ -13,7 +17,7 @@ const aboutData = [
     ],
   },
   {
-    imageUrl: 'xxx',
+    imageUrl: jobWorkers,
     title: 'Why Pathwise Exists',
     description: [
       'College enrollment in the U.S. is declining. Rising costs, unclear job outcomes, and a changing economy have left millions questioning if school is still worth it—especially adults with jobs, kids, or debt.',
@@ -30,7 +34,7 @@ const aboutData = [
     ],
   },
   {
-    imageUrl: 'xxx',
+    imageUrl: jobStudying,
     title: 'Who We Help',
     description: [
       'From parents juggling school pickups to first-gen students navigating alone, Pathwise is built for real people with real responsibilities.',
@@ -46,7 +50,7 @@ const aboutData = [
     ],
   },
   {
-    imageUrl: 'xxx',
+    imageUrl: tutor,
     title: 'What We Do',
     description: [
       'We help you:',

@@ -42,3 +42,13 @@ body {
   font-family: 'Poppins', sans-serif;
   scroll-behavior: smooth;
 }
+
+.clip-pentagon {
+  clip-path: polygon(
+    50% 0%,
+    /* top point */ 100% 38%,
+    /* right upper */ 81% 100%,
+    /* bottom right */ 19% 100%,
+    /* bottom left */ 0% 38% /* left upper */
+  );
+}
