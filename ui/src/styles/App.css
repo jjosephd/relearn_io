@@ -3,6 +3,7 @@
 
 :root {
   font-family: 'Space Grotesk', sans-serif;
+  --color-base-100: oklch(98.5% 0.015 100); /* soft white */
 }
 
 .text-shadow {

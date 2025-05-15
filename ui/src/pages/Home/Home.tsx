@@ -57,6 +57,8 @@ const item = {
   show: { opacity: 1, y: 0 },
 };
 
+const baseColor = 'var(--color-base-100)';
+
 const Home = () => {
   const { ref, inView } = useInView({
     triggerOnce: false,
@@ -73,16 +75,17 @@ const Home = () => {
       {/* Full-width accent section with SVG and cards */}
       <section className="relative bg-accent w-screen overflow-hidden pb-20">
         {/* SVG divider at the top */}
-        <div className="absolute top-0 left-0 w-screen overflow-hidden leading-none z-10">
+        <div className="absolute top-0 left-0 w-screen overflow-hidden leading-none z-10 -translate-y-[1px]">
           <svg
-            className="w-full h-16"
+            className="w-full h-[46px] block overflow-hidden relative -mt-[2px]"
             viewBox="0 0 1440 100"
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="none"
           >
             <path
-              fill="#ffffff"
-              d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,0 L0,0 Z"
+              fill={baseColor}
+              d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,-10 L0,-10 Z"
+              transform="translate(0, -5)"
             />
           </svg>
         </div>

@@ -35,7 +35,26 @@
   --color-error-content: oklch(98% 0.01 30);
   --color--black: oklch(20% 0.02 0);
 }
+@plugin "daisyui/theme" {
+  name: 'darktheme';
 
+  color-scheme: dark; /* color of browser-provided UI */
+  --color-base-100: oklch(20% 0.02 0); /* dark gray */
+  --color-base-200: oklch(10% 0.01 0); /* very dark gray */
+  --color-base-content: oklch(98% 0.01 0); /* light text */
+
+  --color-primary: oklch(78% 0.18 140); /* bright green from #B2F55E */
+  --color-primary-content: oklch(18% 0.03 140); /* dark content */
+
+  --color-secondary: oklch(88% 0.14 100); /* from #FFE66D */
+  --color-secondary-content: oklch(20% 0.03 100);
+
+  --color-accent: oklch(65% 0.22 300); /* from #A66DD4 */
+  --color-accent-content: oklch(98% 0.01 300);
+
+  --color-neutral: oklch(30% 0.03 240); /* dark neutral from #333333 */
+  --color-neutral-content: oklch(96% 0.01 240);
+}
 body {
   margin: 0;
   padding: 0;

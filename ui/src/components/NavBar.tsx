@@ -71,8 +71,12 @@ const NavBar = () => {
           >
             {/* Logo */}
             <div className="flex items-center">
-              <div className="cap-icon border rounded-full h-[1.5rem] w-[1.5rem] flex items-center justify-center bg-primary mx-1">
-                <img src={capIcon} alt="cap icon" className="size-4" />
+              <div className="cap-icon border border-r-3 border-b-3 rounded-full h-[2.0rem] w-[2.0rem] flex items-center justify-center bg-primary mx-1">
+                <img
+                  src={capIcon}
+                  alt="cap icon"
+                  className="size-6 font-extrabold"
+                />
               </div>
               <Link to="/" className="text-primary text-sm hidden md:flex">
                 Aguidor

@@ -42,7 +42,7 @@ const Hero = () => {
 
         <button
           type="submit"
-          className="btn rounded border-2 bg-primary text-black hover:bg-primary/80 ease-in duration-300 btn-outline border-r-4 border-b-4 border-black relative w-full"
+          className="btn rounded p-4 border-2 bg-primary text-black hover:bg-primary/80 ease-in duration-300 btn-outline border-r-4 border-b-4 border-black relative w-full"
         >
           <AcademicCapIcon className="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2" />
           <span className="uppercase">Join the waitlist</span>
