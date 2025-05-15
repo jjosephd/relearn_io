@@ -23,7 +23,7 @@ const AboutCard = ({
   const toggleExpand = () => setExpanded((prev) => !prev);
 
   return (
-    <div className="card relative p-6 rounded-lg shadow-lg transition-shadow hover:shadow-xl">
+    <div className="card relative p-6 rounded-lg shadow-lg transition-shadow hover:shadow-xl border-2 border-r-4 border-b-4">
       <div className="text-xl font-bold mb-3 z-3">{title}</div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 relative">
         {/* Triangle SVG background */}
