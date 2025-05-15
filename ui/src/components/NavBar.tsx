@@ -21,7 +21,15 @@ const NavBar = () => {
 
     const handleScroll = () => {
       const currentY = window.scrollY;
-      setIsScrolled(currentY > 50);
+
+      // Always show nav when at top
+      if (currentY <= 10) {
+        setScrollDir('up');
+        setIsScrolled(false);
+        return;
+      }
+
+      setIsScrolled(true);
 
       if (currentY > lastScrollY) {
         setScrollDir('down');
@@ -35,7 +43,16 @@ const NavBar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsOpen(false);
+      }
+    };
 
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
     <>
       <div className="drawer z-50">
@@ -58,7 +75,7 @@ const NavBar = () => {
                 <img src={capIcon} alt="cap icon" className="size-4" />
               </div>
               <Link to="/" className="text-primary text-sm hidden md:flex">
-                Learn Again
+                Aguidor
               </Link>
             </div>
 
@@ -90,7 +107,7 @@ const NavBar = () => {
 
             {/* Mobile menu button */}
             <div
-              className={`md:hidden transition-all duration-300 transform ${
+              className={`p-2 md:hidden transition-all duration-300 transform ${
                 scrollDir === 'down' ? '-translate-y-full' : 'translate-y-0'
               }`}
             >
