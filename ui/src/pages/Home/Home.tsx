@@ -82,10 +82,12 @@ const Home = () => {
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="none"
           >
+            {/* Flat top rect to hide seam */}
+            <rect x="0" y="0" width="1440" height="2" fill="#FAF9F0" />
+            {/* Wave path */}
             <path
               fill={baseColor}
               d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,-10 L0,-10 Z"
-              transform="translate(0, -5)"
             />
           </svg>
         </div>

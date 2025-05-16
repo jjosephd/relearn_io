@@ -21,7 +21,7 @@ const Layout = () => {
   return (
     <>
       <div
-        className="min-h-screen overflow-x-hidden bg-base-100 flex flex-col"
+        className="min-h-screen bg-base-100 flex flex-col overflow-x-hidden"
         data-theme="maintheme"
       >
         <nav>

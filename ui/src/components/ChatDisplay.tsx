@@ -43,7 +43,7 @@ const ChatDisplay: React.FC<Props> = ({ messages, schools }) => {
           ? 'bg-[#1e293b]' // assistant
           : isInfo
           ? 'bg-[#334155] border border-slate-600'
-          : 'bg-base-200'; // user
+          : 'bg-base-100 border-2 border-r-4 border-b-4'; // user
 
         const icon = isAssistant ? (
           <div className="flex-shrink-0 p-2 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 shadow-lg w-10 h-10 flex items-center justify-center">
